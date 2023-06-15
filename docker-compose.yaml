@@ -14,15 +14,20 @@ services:
       - DB_NAME=blog
       - DB_USER=root
       - DB_PASSWORD=dev_pass
+    networks:
+      - app
 
   db:
     container_name: blog_db
-    image: mysql:latest
+    image: mysql:8.0
+    restart: always
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=dev_pass
       - MYSQL_DATABASE=blog
+    networks: 
+      - app
 
   client:
     container_name: blog_client
@@ -32,3 +37,8 @@ services:
       - ./client:/var/www/client
     ports:
       - "3000:3000"
+    networks: 
+      - app
+
+networks:
+  app:
