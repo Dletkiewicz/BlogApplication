@@ -2,7 +2,7 @@
 This is a blog app, built using Next.js for the front-end, Java 17 for the API, and MySQL for the database.
 
 # Technologies Used
-**Front-end**: Next.js, React, Tailwind
+**Front-end**: Next.js, React, Tailwind, Typescript
 
 **Back-end**: Java 17, Spring Boot
 
