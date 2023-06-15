@@ -1,6 +1,7 @@
 version: '3'
 services:
-  app:
+  api:
+    container_name: blog_api
     build:
       context: api
     ports:
@@ -15,9 +16,19 @@ services:
       - DB_PASSWORD=dev_pass
 
   db:
+    container_name: blog_db
     image: mysql:latest
     ports:
       - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=dev_pass
       - MYSQL_DATABASE=blog
+
+  client:
+    container_name: blog_client
+    build:
+        context: client
+    volumes:
+      - ./client:/var/www/client
+    ports:
+      - "3000:3000"
