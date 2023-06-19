@@ -5,40 +5,36 @@ services:
     build:
       context: api
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - db
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_NAME=blog
-      - DB_USER=root
-      - DB_PASSWORD=dev_pass
     networks:
       - app
 
   db:
     container_name: blog_db
-    image: mysql:8.0
+    image: mariadb:latest
     restart: always
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=dev_pass
-      - MYSQL_DATABASE=blog
+      MARIADB_DATABASE: blog
+      MARIADB_USER: user
+      MARIADB_USER_PASSWORD: pass
+      MARIADB_ROOT_PASSWORD: root
     networks: 
       - app
 
-  client:
-    container_name: blog_client
-    build:
-        context: client
-    volumes:
-      - ./client:/var/www/client
-    ports:
-      - "3000:3000"
-    networks: 
-      - app
+#  client:
+#    container_name: blog_client
+#    build:
+#        context: client
+#    volumes:
+#      - ./client:/var/www/client
+#    ports:
+#      - "3000:3000"
+#    networks:
+#      - app
 
 networks:
   app:
